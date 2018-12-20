@@ -1,18 +1,30 @@
 <template>
   <div class="container">
     <div class="mt-8 flex flex-row-reverse">
-      <button v-if="!isLogin" @click="googleSignIn" class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded">googleでログイン</button>
-      <button v-if="isLogin" @click="googleSignOut" class="bg-transparent hover:bg-teal text-teal-dark font-semibold hover:text-white py-2 px-4 border border-teal hover:border-transparent rounded">ログアウト</button>
+      <div v-if="!userName">
+        <button @click="signIn"
+                class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded">
+          googleでログイン
+        </button>
+      </div>
+      <div v-if="userName">
+        <button @click="signOut"
+                class="bg-transparent hover:bg-teal text-teal-dark font-semibold hover:text-white py-2 px-4 border border-teal hover:border-transparent rounded">
+          ログアウト
+        </button>
+        <p>{{ userName }}</p>
+        <img :src="userPhoto"
+             class="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0">
+      </div>
     </div>
     <div class="">
-      <game-intro v-if="!isLogin"></game-intro>
-      <my-tree v-if="isLogin" :user="userData"></my-tree>
+      <game-intro v-if="!userName"></game-intro>
+      <my-tree v-if="userName"></my-tree>
     </div>
   </div>
 </template>
 
 <script>
-import firebase from '@/plugins/firebase'
 import GameIntro from '~/components/GameIntro.vue'
 import MyTree from '~/components/MyTree.vue'
 
@@ -21,32 +33,20 @@ export default {
     GameIntro,
     MyTree
   },
+  computed: {
+    userName () { return this.$store.state.userName },
+    userPhoto () { return this.$store.state.userPhoto }
+  },
+  mounted () {
+    this.$store.dispatch('googleAuthStateChanged')
+  },
   methods: {
-    googleSignIn: function() {
-      firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    signIn () {
+      this.$store.dispatch('googleSignIn')
     },
-    googleSignOut: function() {
-      firebase.auth().signOut();
+    signOut () {
+      this.$store.dispatch('googleSignOut')
     }
-  },
-  asyncData (context) {
-    // コンポーネントをロードする前に毎回呼び出されます
-    return { name: 'Hello, World！！', isLogin:false, userData:null}
-  },
-  fetch () {
-    // `fetch` メソッドはページの描画前にストアを満たすために使用されます
-  },
-  mounted: function() {
-    firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
-      if (user) {
-        this.isLogin = true;
-        this.userData = user;
-      } else {
-        this.isLogin = false;
-        this.userData = null;
-      };
-    });
   }
 }
 </script>
