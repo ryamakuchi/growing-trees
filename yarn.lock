@@ -1113,6 +1113,11 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
+"@posva/vuefire-core@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@posva/vuefire-core/-/vuefire-core-1.0.3.tgz#d439cc315749d08a3045ab97baa25148755d3948"
+  integrity sha512-XWk789/LyiiIa8J73IWJBtfgvR6gY2eW/GbGHZgE0jBiVAOOMDHxXbusUP4tQt5Rs9VJXov67PDUzT2WHUxlKg==
+
 "@types/cookie@^0.3.1":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.3.2.tgz#453f4b14b25da6a8ea4494842dedcbf0151deef9"
@@ -7796,6 +7801,13 @@ vuex@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
   integrity sha512-wLoqz0B7DSZtgbWL1ShIBBCjv22GV5U+vcBFox658g6V0s4wZV9P4YjCNyoHSyIBpj1f29JBoNQIqD82cR4O3w==
+
+vuexfire@^3.0.0-alpha.14:
+  version "3.0.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/vuexfire/-/vuexfire-3.0.0-alpha.14.tgz#8fbbb963b5cccdd0f46cebf087b180a9112969a3"
+  integrity sha512-8g10+Corxgcjd+9tMGT2R2YYdDtgGeHOc5DDtqvoBEyxIe/Yz3c0L8DwCSqjV+Ed3MjID/rgGP3r9xDYGrrHcg==
+  dependencies:
+    "@posva/vuefire-core" "^1.0.3"
 
 watchpack@^1.5.0:
   version "1.6.0"

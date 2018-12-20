@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-full mt-8 rounded overflow-hidden shadow-lg">
-    <button @click="increment()">{{ count }}
+    <button @click="increment()">{{ $store.state.counter }}
       <Logo/>
     </button>
     <div class="px-6 py-4">
@@ -19,12 +19,9 @@ export default {
   components: {
     Logo
   },
-  computed: {
-    count () { return this.$store.state.counter }
-  },
   methods: {
-    increment (e) {
-      this.$store.commit('increment')
+    increment () {
+      this.$store.dispatch('increment')
     }
   }
 }
