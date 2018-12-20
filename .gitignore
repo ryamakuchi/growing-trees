@@ -79,3 +79,6 @@ dist
 
 # IDE
 .idea
+
+# APIkey が書いてあるのでいちおう隠す
+src/plugins/firebase.js
