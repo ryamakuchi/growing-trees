@@ -5,12 +5,16 @@ export const state = () => ({
   counter: 0,
   userEmail: null,
   userName: null,
-  userPhoto: null
+  userPhoto: null,
+  noAccount: false
 })
 
 export const mutations = {
   increment (state) {
     state.counter++
+  },
+  reset (state) {
+    state.counter = 0
   },
   storeUser (state, payload) {
     state.userEmail = payload.userEmail
@@ -21,6 +25,7 @@ export const mutations = {
     state.userEmail = null
     state.userName = null
     state.userPhoto = null
+    state.noAccount = true
   },
   saveUser (state, payload) {
     state.counter = payload.number
@@ -75,6 +80,16 @@ export const actions = {
     }).then(() => {
       console.log("Document successfully updated!")
       commit('increment')
+    }).catch((error) => {
+      console.error("Error updating document: ", error)
+    })
+  },
+  reset ({ commit, state }) {
+    db.collection('users').doc(state.userEmail).update({
+      counter: 0
+    }).then(() => {
+      console.log("Document successfully 0 updated!")
+      commit('reset')
     }).catch((error) => {
       console.error("Error updating document: ", error)
     })

@@ -1,26 +1,28 @@
 <template>
   <div class="container">
     <div class="mt-8 flex flex-row-reverse">
-      <div v-if="!$store.state.userName">
+      <div v-if="$store.state.noAccount">
         <button @click="signIn"
-                class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded">
-          googleでログイン
+                class="bg-teal lg:text-2xl hover:bg-teal-dark text-white font-bold py-2 px-4 rounded">
+          google でログイン
         </button>
       </div>
-      <div v-if="$store.state.userName">
-        <button @click="signOut"
-                class="bg-transparent hover:bg-teal text-teal-dark font-semibold hover:text-white py-2 px-4 border border-teal hover:border-transparent rounded">
-          ログアウト
-        </button>
-        <p>{{ $store.state.userName }}</p>
-        <img :src="$store.state.userPhoto"
-             class="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0">
-      </div>
+      <ul v-if="$store.state.userName" class="list-reset flex items-center">
+        <li>
+          <button @click="signOut"
+                  class="bg-transparent lg:text-2xl hover:bg-teal text-teal-dark font-semibold hover:text-white mr-6 py-2 px-4 border border-teal hover:border-transparent rounded">
+            ログアウト
+          </button>
+        </li>
+        <li>
+          <img :src="$store.state.userPhoto"
+               class="block h-16 sm:h-24 rounded-full mx-auto">
+          <p class="lg:text-2xl m-auto mt-2">{{ $store.state.userName }}</p>
+        </li>
+      </ul>
     </div>
-    <div class="">
-      <game-intro v-if="!$store.state.userName"></game-intro>
-      <my-tree v-if="$store.state.userName"></my-tree>
-    </div>
+    <game-intro v-if="$store.state.noAccount"></game-intro>
+    <my-tree v-if="$store.state.userName"></my-tree>
   </div>
 </template>
 
