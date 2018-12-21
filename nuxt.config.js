@@ -26,8 +26,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/css/tailwind.css',
-    '~/assets/css/main.css'
+    '~/assets/css/tailwind.css'
   ],
 
   /*
